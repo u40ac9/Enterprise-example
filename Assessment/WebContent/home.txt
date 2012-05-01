@@ -1,0 +1,3 @@
+<p><a href="Button?action=index">Home</a> |
+<a href="customer.jsp">Customer</a> |
+<a href="staffLogin.jsp">Staff</a> |

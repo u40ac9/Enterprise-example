@@ -1,0 +1,4 @@
+<p><a href="index.jsp">Home</a> |
+<a href="Button?action=listMotifs">Browse</a> |
+<a href="Customer?action=myOrders">My Orders</a> |
+

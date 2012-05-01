@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Assessment</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ButtonServlet</display-name>
+    <servlet-name>ButtonServlet</servlet-name>
+    <servlet-class>com.buttons.web.ButtonServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ButtonServlet</servlet-name>
+    <url-pattern>/ButtonServlet</url-pattern>
+    <url-pattern>/Button</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
+  	<display-name>CustomerServlet</display-name>
+  	<servlet-name>CustomerServlet</servlet-name>
+  	<servlet-class>com.buttons.web.CustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>CustomerServlet</servlet-name>
+  <url-pattern>/CustomerServlet</url-pattern>
+  <url-pattern>/Customer</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>OrderServlet</display-name>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.buttons.web.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/OrderServlet</url-pattern>
+    <url-pattern>/Order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StaffServlet</display-name>
+    <servlet-name>StaffServlet</servlet-name>
+    <servlet-class>com.buttons.web.StaffServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StaffServlet</servlet-name>
+    <url-pattern>/StaffServlet</url-pattern>
+    <url-pattern>/Staff</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -1,0 +1,42 @@
+body{
+	
+	font-family: Ariel, Helvetica;
+	
+	background-color: #FFFF00;
+}
+
+a:link
+{
+	color: #003399;
+	font-weight: bold;
+}
+
+a:visited
+{
+	color: #993300; 
+	font-weight: bold;
+}
+
+h1
+{
+	font-family: Ariel, Helvetica;
+	color: rgb(0,102,153);
+	text-align: center;
+}
+	
+h2
+{
+	font-family: Ariel, Helvetica;
+	color: #3B6E8A;
+	text-align: center;
+}
+h3
+{
+	font-family: Helvetica;
+	color: #3B6E8A;
+}
+h4
+{
+	font-family: Helvetica;
+	color: rgb(0,102,153);
+}

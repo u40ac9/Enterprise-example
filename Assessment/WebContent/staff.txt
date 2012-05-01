@@ -1,0 +1,5 @@
+<p><a href="Staff?action=home">Home</a> |
+<a href="addMotif.jsp">Add Motif</a> |
+<a href="deleteMotif.jsp">Delete Motifs</a> |
+<a href="Button?action=listMotifs">List All Motifs</a> |
+<a href="Order?action=listOrders">View Orders</a> |
