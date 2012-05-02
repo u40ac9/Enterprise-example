@@ -126,17 +126,23 @@ public class Motifs {
 	 */
 	public void deleteMotif(int id) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
 		DbBean db = new DbBean();
-		StringBuffer qry = new StringBuffer(1024);
-		qry.append("DELETE FROM motif WHERE ID=");
-		qry.append(id);
-		db.connect();
-		Statement stmt = db.createStatement();
-		stmt.executeUpdate(qry.toString());
-		stmt.close();
-		//Close connection
-		db.close();
+		try{
+			db.connect();
+			PreparedStatement inst = db.prepareStatement("DELETE FROM motif WHERE ID=?");
+			inst.setInt(1, id);
+			inst.executeUpdate();
+			inst.close();
+			
+			//Close connection
+			db.close();
 		}
-	
+		catch(SQLException e){
+			System.out.println(
+					"SQLException from db: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+		
 	/**
 	 * List all motifs, to list all motifs 'all' must be
 	 * passed as the string.
@@ -198,5 +204,76 @@ public class Motifs {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	/**
+	 * Update the quantity of a motif
+	 * 
+	 * TODO these can be combined into one method
+	 */
+	public void updateQuantity(int id, int quantity) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
+		DbBean db = new DbBean();
+		try{
+			db.connect();
+			PreparedStatement inst = db.prepareStatement("UPDATE motif SET Quantity = ? WHERE ID = ?");
+			inst.setInt(1, quantity);
+			inst.setInt(2, id);
+			inst.executeUpdate();
+			inst.close();
+			
+			//Close connection
+			db.close();
+		}
+		catch(SQLException e){
+			System.out.println(
+					"SQLException from db: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Update the price of an motif
+	 */
+	public void updatePrice(int id, double price)throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
+		DbBean db = new DbBean();
+		try{
+			db.connect();
+			PreparedStatement inst = db.prepareStatement("UPDATE motif SET Price = ? WHERE ID = ?");
+			inst.setDouble(1, price);
+			inst.setInt(2, id);
+			inst.executeUpdate();
+			inst.close();
+			
+			//Close connection
+			db.close();
+		}
+		catch(SQLException e){
+			System.out.println(
+					"SQLException from db: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Update the name of a motif
+	 */
+	public void updateName(int id, String name)throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
+		DbBean db = new DbBean();
+		try{
+			db.connect();
+			PreparedStatement inst = db.prepareStatement("UPDATE motif SET Name = ? WHERE ID = ?");
+			inst.setString(1, name);
+			inst.setInt(2, id);
+			inst.executeUpdate();
+			inst.close();
+			
+			//Close connection
+			db.close();
+		}
+		catch(SQLException e){
+			System.out.println(
+					"SQLException from db: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

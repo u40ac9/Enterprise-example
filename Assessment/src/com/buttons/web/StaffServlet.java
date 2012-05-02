@@ -78,6 +78,7 @@ public class StaffServlet extends HttpServlet {
 		if(log){
 			String stringURL = "/staff.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(stringURL);
+			//Set the session as being a staff session
 			rd.forward(request, response);
 		}
 		else{

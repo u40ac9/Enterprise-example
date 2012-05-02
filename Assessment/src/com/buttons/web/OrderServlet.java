@@ -86,7 +86,7 @@ public class OrderServlet extends HttpServlet {
 			HttpServletResponse response, HttpSession session) throws ServletException, 				  IOException {
 		
 		String message = null;
-		if(!(Boolean) session.getValue("loggedIn")){
+		if(!(Boolean) session.getAttribute("customer")){
 			message = "Please login first or create an account first.";
 			request.setAttribute("message", message);
 			
@@ -101,7 +101,7 @@ public class OrderServlet extends HttpServlet {
 		double price = Double.parseDouble(request.getParameter("price"));
 	    int motifID = Integer.parseInt(request.getParameter("motifID"));
 	    int quantity = Integer.parseInt(request.getParameter("quantity"));
-	    int customerID = (Integer) session.getValue("customerID");
+	    int customerID = (Integer) session.getAttribute("customerID");
 	    
 		try {
             Orders orders = new Orders();

@@ -22,9 +22,9 @@
 
 <form name="loginCustomer" method="post" action="Customer?action=loginCustomer">
 <table border="0" width="90%">
-<tr><td>ID</td><td><input type="text" name="customerID"></td></tr>
-<tr><td>Password</td><td><input type="text" name="password"></td></tr>
-<tr><td colspan="2"><input type="submit" name="Submit" value="Submit"></td></tr>
+<tr><td>ID</td><td><input type="text" name="customerID"/></td></tr>
+<tr><td>Password</td><td><input type="password" name="password"/></td></tr>
+<tr><td colspan="2"><input type="submit" name="Submit" value="Submit"/></td></tr>
 </table>    
 </form>
 

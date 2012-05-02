@@ -14,9 +14,9 @@
 
 <form name="login" method="post" action="Staff?action=login">
 <table border="0" width="25%">
-<tr><td>Name</td><td><input type="text" name="name"></td></tr>
-<tr><td>Password</td><td><input type="password" name="password"></td></tr>
-<tr><td colspan="2"><input type="submit" name="Submit" value="Submit"></td></tr>
+<tr><td>Name</td><td><input type="text" name="name"/></td></tr>
+<tr><td>Password</td><td><input type="password" name="password"/></td></tr>
+<tr><td colspan="2"><input type="submit" name="Submit" value="Submit"/></td></tr>
 </table>    
 </form>
 

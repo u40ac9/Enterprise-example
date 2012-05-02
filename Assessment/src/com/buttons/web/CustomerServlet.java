@@ -64,48 +64,36 @@ public class CustomerServlet extends HttpServlet {
             	try {
 					login(request, response, ID, password);
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             } else if (cmd.equals("newCustomer")){
             	try {
 					newCustomer(request, response);
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             } else if (cmd.equals("myOrders")){
             	try {
 					displayMyOrders(request, response);
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             } else {
@@ -121,7 +109,7 @@ public class CustomerServlet extends HttpServlet {
 	  HttpSession session = request.getSession(true);
 		
 	  Orders orders = new Orders();
-	  String ID = Integer.toString((Integer) session.getValue("customerID"));
+	  String ID = Integer.toString((Integer) session.getAttribute("customerID"));
 	  
 	  Vector <Orders> vec = new Vector <Orders>();
 	  vec = orders.listOrders(ID);
@@ -177,7 +165,7 @@ public class CustomerServlet extends HttpServlet {
 		
 		System.out.println("Logging in");
 		HttpSession session = request.getSession(true);
-		session.setAttribute("loggedIn", true);
+		session.setAttribute("customer", true);
 		
 		ResultSet rs = null;
 		DbBean db = new DbBean();
@@ -206,7 +194,7 @@ public class CustomerServlet extends HttpServlet {
 		System.out.println("Logged in");
 		
 		ButtonServlet bs = new ButtonServlet();
-		session.putValue("customerID", ID);
+		session.setAttribute("customerID", ID);
 		bs.listMotifs(request, response, session);
 	}
 	
