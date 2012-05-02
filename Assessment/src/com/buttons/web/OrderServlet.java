@@ -3,6 +3,7 @@ package com.buttons.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.buttons.models.Motifs;
 import com.buttons.models.Orders;
 
 /**
@@ -64,7 +66,21 @@ public class OrderServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else if (cmd.equals("insertOrder")){
-				addOrder(request, response, session);
+				try {
+					addOrder(request, response, session);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else if(cmd.equals("delete")){
 				deleteOrder(request, response);
 			} else {
@@ -83,10 +99,10 @@ public class OrderServlet extends HttpServlet {
 	}
 	
 	private void addOrder(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws ServletException, 				  IOException {
+			HttpServletResponse response, HttpSession session) throws ServletException, 				  IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		
 		String message = null;
-		if(!(Boolean) session.getAttribute("customer")){
+		if(!(Boolean) session.getValue("loggedIn")){
 			message = "Please login first or create an account first.";
 			request.setAttribute("message", message);
 			
@@ -98,11 +114,23 @@ public class OrderServlet extends HttpServlet {
 		
 		else {
 		
-		double price = Double.parseDouble(request.getParameter("price"));
 	    int motifID = Integer.parseInt(request.getParameter("motifID"));
 	    int quantity = Integer.parseInt(request.getParameter("quantity"));
-	    int customerID = (Integer) session.getAttribute("customerID");
+	    int customerID = (Integer) session.getValue("customerID");
 	    
+	    Vector<Motifs> vec = new Vector<Motifs>();
+	    Motifs mot = new Motifs();
+	    vec = mot.listMotifs("all");
+	    double price = 0.0;
+	    
+	    Iterator it =  vec.iterator();
+	    while(it.hasNext()){
+	    	mot = (Motifs) it.next();
+	    	if(mot.getID() == motifID){
+	    		price = mot.getPrice() * quantity;
+	    	}
+	    }
+	     
 		try {
             Orders orders = new Orders();
         	orders.insertorder(price, motifID, quantity, customerID);
@@ -117,9 +145,8 @@ public class OrderServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		String stringURL = "/MyOrders.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(stringURL);
-		rd.forward(request, response);
+		CustomerServlet cs = new CustomerServlet();
+		cs.displayMyOrders(request, response);
 		
 		}
 	}

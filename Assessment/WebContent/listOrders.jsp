@@ -20,6 +20,7 @@
 
 
 <body>
+
 <div align ="center"><%@include file="customer.txt" %></div>
 <h1>Welcome loyal staff member</h1>
 

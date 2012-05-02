@@ -119,7 +119,7 @@ public class Orders {
 			inst.setInt(2,motifID);
 			inst.setInt(3,quantity);
 			inst.setDouble(4,price);
-			inst.setInt(4,customerID);
+			inst.setInt(5,customerID);
 			
 			inst.executeUpdate();
 			inst.close();
@@ -164,8 +164,8 @@ public class Orders {
 			qry.append("SELECT * from orders");
 		}
 		else{
-			qry.append("SELECT * from orders where ");
-			qry.append("ID = ");
+			qry.append("SELECT * from app.orders where ");
+			qry.append("CustomerID = ");
 			qry.append(Integer.parseInt(value));
 		}
 		db.connect();

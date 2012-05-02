@@ -41,8 +41,7 @@ public class ButtonServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		session.setAttribute("customer", false);
-		session.setAttribute("staff", false);
+		session.putValue("loggedIn", false);
 	
 		PrintWriter out = response.getWriter();
         // the action element that we'll check for
@@ -56,72 +55,48 @@ public class ButtonServlet extends HttpServlet {
                 try {
 					listMotifs(request, response, session);
 				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             } else if (cmd.equals("addMotif")){
                 try {
 					addMotif(request, response);
 				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             } else if (cmd.equals("deleteMotif")){
                 try {
 					deleteMotif(request, response);
 				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-            } else if(cmd.equals("updatePrice")){
-            	try {
-					updatePrice(request, response);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-            } else if(cmd.equals("updateName")){
-            	try {
-					updateName(request, response);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-            } else if(cmd.equals("updateQuantity")){
-            	try {
-					updateQuantity(request, response);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             } else {
@@ -168,18 +143,17 @@ public class ButtonServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
-	public void listMotifs(HttpServletRequest request,
+	void listMotifs(HttpServletRequest request,
 	HttpServletResponse response, HttpSession session) throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		Motifs mot = new Motifs();
         Vector <Motifs> vec = new Vector <Motifs>( );
         vec = mot.listMotifs("all");
         
-        
-        //YOU CAN USE THIS TO CHECK IF STAFF AND DISPLAY CORRECT CONTENT
-        if((Boolean)session.getAttribute("loggedIn")){
-        int customerID = (Integer) session.getAttribute("customerID"); 
+        if((Boolean) session.getValue("loggedIn")){
+        int customerID = (Integer) session.getValue("customerID"); 
         request.setAttribute("customerID", customerID);
         }
+        
         request.setAttribute("items", vec);
 		
         
@@ -187,30 +161,6 @@ public class ButtonServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(stringURL);
 		rd.forward(request, response);
 		
-	}
-	
-	private void updatePrice(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		double price = Double.parseDouble(request.getParameter("price"));
-		Motifs mot = new Motifs();
-		mot.updatePrice(id, price);
-	}
-	
-	private void updateQuantity(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
-		int id = Integer.parseInt(request.getParameter("id"));
-		int quantity = Integer.parseInt(request.getParameter("price"));
-		Motifs mot = new Motifs();
-		mot.updatePrice(id, quantity);
-	}
-	
-	private void updateName(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
-		int id = Integer.parseInt(request.getParameter("id"));
-		String name = request.getParameter("name");
-		Motifs mot = new Motifs();
-		mot.updateName(id, name);
 	}
 
 	private void goHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

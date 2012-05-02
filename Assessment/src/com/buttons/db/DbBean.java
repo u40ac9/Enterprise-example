@@ -130,13 +130,13 @@ public class DbBean {
 		StringBuffer qry = new StringBuffer(1024);
 		qry.append("SELECT MAX(");
 		qry.append(column);
-		qry.append(") as maxValue FROM ");
+		qry.append(") FROM ");
 		qry.append(table);
 
 		connect();
 		rs = doQuery(qry);
 		while(rs.next()){
-			maxValue = rs.getInt("maxValue");
+			maxValue = rs.getInt(1);
 		}
 		return maxValue;
 	}
